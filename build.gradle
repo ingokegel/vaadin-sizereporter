@@ -2,7 +2,7 @@ apply plugin: 'java'
 
 defaultTasks 'classes', 'compileWidgetSet'
 
-version = '0.1'
+version = '0.1.1'
 ext.vaadinVersion='7.0.0'
 
 repositories {
@@ -29,6 +29,11 @@ ext.compileClassPath = files(
         configurations.compile.files,
         configurations.gwt.files
 )
+
+compileJava {
+    sourceCompatibility = '1.6'
+    targetCompatibility = '1.6'
+}
 
 clean {
     dependsOn 'cleanCompileWidgetSet'
