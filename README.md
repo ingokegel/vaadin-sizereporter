@@ -20,7 +20,7 @@ first size report and all subsequent resizes, register a `ComponentResizeListene
     sizeReporter.addResizeListener(new ComponentResizeListener() {
          @Override
          public void sizeChanged(ComponentResizeEvent event) {
-             // usee event.getWidth() and  event.getHeight()
+             // use event.getWidth() and  event.getHeight()
          }
      });
 
