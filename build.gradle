@@ -1,0 +1,70 @@
+apply plugin: 'java'
+
+defaultTasks 'classes', 'compileWidgetSet'
+
+version = '0.1'
+ext.vaadinVersion='7.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    gwt
+}
+
+dependencies {
+    compile group: 'com.vaadin', name: 'vaadin-client', version: vaadinVersion
+    compile group: 'com.vaadin', name: 'vaadin-themes', version: vaadinVersion
+    compile group: 'com.vaadin', name: 'vaadin-server', version: vaadinVersion
+    gwt group: 'com.vaadin', name: 'vaadin-client-compiler', version: vaadinVersion
+}
+
+ext.widgetSetName = 'com.ejt.vaadin.sizereporter.WidgetSet'
+ext.widgetSetBuildDir = mkdir(file("${buildDir}/widgetset"))
+
+ext.compileClassPath = files(
+        sourceSets.main.java.srcDirs,
+        sourceSets.main.output.classesDir,
+        configurations.compile.files,
+        configurations.gwt.files
+)
+
+clean {
+    dependsOn 'cleanCompileWidgetSet'
+}
+
+task compileWidgetSet {
+    inputs.files compileClassPath
+    inputs.files sourceSets.main.java.srcDirs
+    outputs.dir widgetSetBuildDir
+
+    doLast {
+        javaexec {
+            maxHeapSize = '512m'
+            jvmArgs = ['-Xss1024k', '-Djava.awt.headless=true']
+            classpath = compileClassPath
+            main = 'com.google.gwt.dev.Compiler'
+            args = ['-war', widgetSetBuildDir, widgetSetName]
+        }
+
+        delete file("${widgetSetBuildDir}/WEB-INF")
+    }
+}
+
+jar {
+    baseName 'sizereporter'
+    from sourceSets.main.java.srcDirs
+
+    manifest {
+        attributes(
+            'Vaadin-Widgetsets': widgetSetName,
+            'Implementation-Vendor': 'Ingo Kegel',
+            'Implementation-Title': 'SizeReporter',
+            'Implementation-Version': version ,
+            'Vaadin-Package-Version': '1',
+            'Vaadin-License-Title': 'Apache License 2.0',
+            'Vaadin-License-File': 'http://www.apache.org/licenses/LICENSE-2.0.html'
+        )
+    }
+}
