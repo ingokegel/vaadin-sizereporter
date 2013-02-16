@@ -31,6 +31,7 @@ import com.vaadin.shared.ui.Connect;
 public class SizeReporterConnector extends AbstractExtensionConnector {
 
     private SizeReporterRpc sizeReporterRpc;
+    private Widget widget;
 
     @Override
     protected void init() {
@@ -41,17 +42,25 @@ public class SizeReporterConnector extends AbstractExtensionConnector {
     @Override
     protected void extend(ServerConnector target) {
         if (target instanceof ComponentConnector) {
-            final Widget widget = ((ComponentConnector)target).getWidget();
+            widget = ((ComponentConnector)target).getWidget();
+
+            if (widget.getOffsetWidth() > 0  && widget.getOffsetHeight() > 0) {
+                reportSize(); // for widgets already in the layout
+            }
 
             LayoutManager.get(getConnection()).addElementResizeListener(widget.getElement(),
                 new ElementResizeListener() {
                     @Override
                     public void onElementResize(ElementResizeEvent event) {
-                        sizeReporterRpc.sizeChanged(widget.getOffsetWidth(), widget.getOffsetHeight());
+                        reportSize();
                     }
                 }
             );
         }
+    }
+
+    private void reportSize() {
+        sizeReporterRpc.sizeChanged(widget.getOffsetWidth(), widget.getOffsetHeight());
     }
 
 }
