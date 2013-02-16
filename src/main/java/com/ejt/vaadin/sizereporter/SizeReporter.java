@@ -40,6 +40,7 @@ public class SizeReporter extends AbstractExtension {
     private AbstractComponent component;
 
     private Set<ComponentResizeListener> resizeListeners = new LinkedHashSet<ComponentResizeListener>();
+    private Set<ComponentResizeListener> resizeListenersOnce = new LinkedHashSet<ComponentResizeListener>();
 
     private int width = -1;
     private int height = -1;
@@ -86,6 +87,14 @@ public class SizeReporter extends AbstractExtension {
     }
 
     /**
+     * Add a listener for resize events that is removed after the first invocation.
+     * @param listener the listener
+     */
+    public void addResizeListenerOnce(ComponentResizeListener listener) {
+        resizeListenersOnce.add(listener);
+    }
+
+    /**
      * Remove a previously registered resize listener.
      * @param listener
      */
@@ -103,6 +112,10 @@ public class SizeReporter extends AbstractExtension {
         for (ComponentResizeListener listener : resizeListeners) {
             listener.sizeChanged(event);
         }
+        for (ComponentResizeListener listener : resizeListenersOnce) {
+            listener.sizeChanged(event);
+        }
+        resizeListenersOnce.clear();
     }
 
 }
