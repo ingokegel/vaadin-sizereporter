@@ -2,8 +2,8 @@ apply plugin: 'java'
 
 defaultTasks 'classes', 'compileWidgetSet'
 
-version = '0.1.1'
-ext.vaadinVersion='7.0.0'
+version = '0.1.2'
+ext.vaadinVersion='7.1.9'
 
 repositories {
     mavenCentral()
