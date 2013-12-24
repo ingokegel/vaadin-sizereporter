@@ -46,6 +46,7 @@
     <orderEntry type="library" exported="" name="Gradle: vaadin-server-7.1.9" level="project" />
     <orderEntry type="library" exported="" name="Gradle: vaadin-shared-7.1.9" level="project" />
     <orderEntry type="library" exported="" name="Gradle: vaadin-client-7.1.9" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: validation-api-1.0.0.GA" level="project" />
   </component>
 </module>
 

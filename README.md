@@ -31,3 +31,7 @@ See the `TestUi` class for a runnable example.
 The addon is built with gradle. The default tasks builds the distribution JAR file in `build\libs`.
 To compile the widgetset for running the Tomcat run configuration in the IntelliJ IDEA project,
 run the "compileWidgetSet" gradle task first.
+
+## License
+
+Vaadin SizeReporter is released under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
