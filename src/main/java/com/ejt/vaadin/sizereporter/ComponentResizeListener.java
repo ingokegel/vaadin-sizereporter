@@ -16,6 +16,8 @@
 
 package com.ejt.vaadin.sizereporter;
 
-public interface ComponentResizeListener {
+import java.io.Serializable;
+
+public interface ComponentResizeListener extends Serializable {
     void sizeChanged(ComponentResizeEvent event);
 }
