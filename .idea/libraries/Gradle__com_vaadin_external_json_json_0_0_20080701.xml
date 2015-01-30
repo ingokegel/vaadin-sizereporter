@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.vaadin.external.json:json:0.0.20080701">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.vaadin.external.json/json/0.0.20080701/519c8acc83db37d3ca6d086ac63ab8095050a333/json-0.0.20080701.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.vaadin.external.json/json/0.0.20080701/71bd54221e701df9d112bf9ba2918e13b0671f3a/json-0.0.20080701-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

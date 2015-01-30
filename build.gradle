@@ -3,7 +3,7 @@ apply plugin: 'java'
 defaultTasks 'jar'
 
 version = '0.1.2'
-ext.vaadinVersion='7.1.9'
+ext.vaadinVersion='7.3.9'
 
 repositories {
     mavenCentral()
@@ -33,6 +33,14 @@ ext.compileClassPath = files(
 compileJava {
     sourceCompatibility = '1.6'
     targetCompatibility = '1.6'
+    String java6Home = System.getenv()['JAVA_1_6_HOME']
+    if (java6Home) {
+        if (System.getProperty("os.name").toLowerCase().contains('mac')) {
+            options.bootClasspath = "${java6Home}/../Classes/classes.jar"
+        } else {
+            options.bootClasspath = "${java6Home}/jre/lib/rt.jar"
+        }
+    }
 }
 
 clean {

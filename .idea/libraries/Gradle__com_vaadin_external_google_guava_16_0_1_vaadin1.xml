@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.vaadin.external.google:guava:16.0.1.vaadin1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.vaadin.external.google/guava/16.0.1.vaadin1/8f83998831c54d2b586c7aa83c47644239614034/guava-16.0.1.vaadin1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.vaadin.external.google/guava/16.0.1.vaadin1/f6aba9ef548261e1efc021c26b3b8ef5aed66de0/guava-16.0.1.vaadin1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
