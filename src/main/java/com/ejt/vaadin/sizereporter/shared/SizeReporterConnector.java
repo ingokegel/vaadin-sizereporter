@@ -17,8 +17,10 @@
 package com.ejt.vaadin.sizereporter.shared;
 
 import com.ejt.vaadin.sizereporter.SizeReporter;
+import com.google.gwt.event.dom.client.HasLoadHandlers;
+import com.google.gwt.event.dom.client.LoadEvent;
+import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.user.client.ui.Widget;
-
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.LayoutManager;
 import com.vaadin.client.ServerConnector;
@@ -48,14 +50,23 @@ public class SizeReporterConnector extends AbstractExtensionConnector {
                 reportSize(); // for widgets already in the layout
             }
 
-            LayoutManager.get(getConnection()).addElementResizeListener(widget.getElement(),
-                new ElementResizeListener() {
+            // ElementResizeListener does not work for widgets that are 'loaded' (e.g. Image...)
+            if (widget instanceof HasLoadHandlers) {
+                ((HasLoadHandlers) widget).addLoadHandler(new LoadHandler() {
+                    @Override
+                    public void onLoad(LoadEvent event) {
+                        reportSize();
+                    }
+                });
+            } else {
+                LayoutManager.get(getConnection()).addElementResizeListener(widget.getElement(),
+                        new ElementResizeListener() {
                     @Override
                     public void onElementResize(ElementResizeEvent event) {
                         reportSize();
                     }
-                }
-            );
+                });
+            }
         }
     }
 
